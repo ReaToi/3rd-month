@@ -78,7 +78,7 @@ async def quiz_2(call: types.CallbackQuery):
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    # if await bot.send_message(message.from_user.id, int(message.text) ** 2):
+
     if message.text.isnumeric():
         await message.answer(f"{int(message.text) ** 2}")
     else:
