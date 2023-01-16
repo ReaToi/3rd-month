@@ -76,5 +76,5 @@ def register_messege_handler(dp: Dispatcher):
     dp.register_message_handler(start_hendler, commands=['start'])
     dp.register_message_handler(mem, commands=['mem'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
-    dp.register_message_handler(dice, commands=['game'])
+    dp.register_message_handler(dice, commands=['dice'])
     dp.register_message_handler(pin, commands=['pin'], commands_prefix='!')
