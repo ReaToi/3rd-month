@@ -7,11 +7,13 @@ from time import sleep
 async def start_hendler(message: types.Message):
     await bot.send_message(message.chat.id, f'Hello Lord {message.from_user.first_name}')
     await message.answer('commands:\n'
-                         '/game - для админа\n'
                          '/mem\n'
                          '/quiz\n'
-                         '/pin - раблтает в группах\n'
-                         '/dice - для админа\n',)
+                         '/pin - рабoтает в группах\n'
+                         '/dice\n'
+                         'game - для админа\n'
+                         '!ban - работает в группах\n'
+                         )
 
 
 async def mem(message: types.Message):
@@ -29,11 +31,7 @@ async def pin(message: types.Message):
         await message.answer('Пиши в группе!')
 
 
-
-
-
-
-async def game(message: types.Message):
+async def dice(message: types.Message):
     await message.answer('Твой ход')
     user_move = await message.answer_dice()
     sleep(5)
@@ -78,5 +76,5 @@ def register_messege_handler(dp: Dispatcher):
     dp.register_message_handler(start_hendler, commands=['start'])
     dp.register_message_handler(mem, commands=['mem'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
-    dp.register_message_handler(game, commands=['game'])
+    dp.register_message_handler(dice, commands=['game'])
     dp.register_message_handler(pin, commands=['pin'], commands_prefix='!')

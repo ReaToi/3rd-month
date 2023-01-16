@@ -21,16 +21,14 @@ async def ban(message: types.Message):
 
 async def game(message: types.Message):
     if message.text.startswith('game'):
-        if message.chat.type != 'private':
-            if message.from_user.id not in ADMINS:
-                await message.answer('Ты не мой Босс!')
-            else:
-                emoji_list = ["🏀", "⚽", "🎯", "🎲", "🎰", "🎳"]
-                await bot.send_dice(message.chat.id, emoji=choice(emoji_list))
+        if message.from_user.id not in ADMINS:
+            await message.answer('Ты не мой Босс!')
         else:
-            await message.answer('Пиши в группе!!')
+            emoji_list = ["🏀", "⚽", "🎯", "🎲", "🎰", "🎳"]
+            await bot.send_dice(message.chat.id, emoji=choice(emoji_list))
+
 
 
 def register_handlers_admin(dp: Dispatcher):
-    dp.register_message_handler(game, commands=['dice'])
+    dp.register_message_handler(game)
     dp.register_message_handler(ban, commands=['ban'], commands_prefix='!')
