@@ -2,6 +2,7 @@ from aiogram import Dispatcher, types
 from config import bot
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from time import sleep
+from client_kb import client_kb
 
 
 async def start_hendler(message: types.Message):
@@ -12,7 +13,7 @@ async def start_hendler(message: types.Message):
                          '/pin - рабoтает в группах\n'
                          '/dice\n'
                          'game - для админа\n'
-                         '!ban - работает в группах\n'
+                         '!ban - работает в группах\n',
                          )
 
 
