@@ -21,7 +21,7 @@ async def sql_command_insert(state):
     async with state.proxy() as data:
         cursor.execute('INSERT INTO mentors VALUES '
                        '(?, ?, ?, ?, ?)', tuple(data.values()))
-        db.commit()
+    db.commit()
 
 
 async def sql_command_random():
@@ -31,12 +31,5 @@ async def sql_command_random():
 
 
 async def sql_comand_deleete(user_id):
-    cursor.execute('DELETE FROM mentors WRERE id = ?', (user_id, ))
+    cursor.execute('DELETE FROM mentors WHERE id = ?', (user_id,))
     db.commit()
-
-
-
-
-
-
-# sql_create()
