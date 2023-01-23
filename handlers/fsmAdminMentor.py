@@ -63,18 +63,18 @@ async def load_group(message: types.Message, state: FSMContext):
     await message.answer(f"ID:{data['ID']}, имя:{data['name']}, направление:{data['direction']}"
                          f", возраст:{data['age']}, группа:{data['group']}")
     await message.answer('ВСЕ?')
-    await message.text.answer("введите 'да' или 'нет'")
+    await message.answer("введите 'да' или 'нет'")
     await FSMAdmin.next()
 
 
 async def submit(message: types.Message, state: FSMContext):
-    if message.text.lower() == "да":
+    if message.text.lower() == 'yes':
         await sql_command_insert(state)
         await state.finish()
     elif message.text.lower() == 'заново':
         await FSMAdmin.name.set()
-    else:
-        await message.text.answer("введите 'да' или 'нет'")
+    # else:
+        # await message.answer("введите 'да' или 'нет'")
 
 
 async def cancel_reg(message: types.Message, state: FSMContext):
