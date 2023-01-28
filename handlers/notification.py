@@ -18,7 +18,7 @@ async def sleep():
 
 
 async def scheduler():
-    aioschedule.every().saturday.do(sleep)
+    aioschedule.every().saturday.at('22:00').do(sleep)
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
