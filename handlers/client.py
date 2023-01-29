@@ -2,7 +2,7 @@ from aiogram import Dispatcher, types
 from config import bot, ADMINS
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from time import sleep
-from client_kb import client_kb
+from parser.news import parser
 from db.bot_db import sql_command_random, sql_comand_deleete
 
 async def start_hendler(message: types.Message):
@@ -95,6 +95,17 @@ async def complete_delete(call: types.CallbackQuery):
     await bot.delete_message(call.from_user.id, call.message.message_id)
 
 
+async def get_videocards(message: types.Message):
+    videocards = parser()
+    for i in videocards:
+        await message.answer(
+            f"{i['photo']}\n",
+            f"{i['title']}\n",
+            f"{i['price']}\n",
+            f"{i['vendor_code']}\n"
+        )
+
+
 def register_messege_handler(dp: Dispatcher):
     dp.register_message_handler(start_hendler, commands=['start'])
     dp.register_message_handler(mem, commands=['mem'])
@@ -104,3 +115,4 @@ def register_messege_handler(dp: Dispatcher):
     dp.register_message_handler(get_random_user, commands=['get'])
     dp.register_callback_query_handler(complete_delete,
                                        lambda call: call.data and call.data.startswith('delete '))
+    dp.register_message_handler(get_videocards, commands=['videocards'])
