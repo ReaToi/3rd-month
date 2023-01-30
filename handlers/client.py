@@ -1,9 +1,10 @@
 from aiogram import Dispatcher, types
 from config import bot, ADMINS
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
 from time import sleep
 from parser.news import parser
 from db.bot_db import sql_command_random, sql_comand_deleete
+
 
 async def start_hendler(message: types.Message):
     await bot.send_message(message.chat.id, f'Hello Lord {message.from_user.first_name}')
@@ -97,13 +98,14 @@ async def complete_delete(call: types.CallbackQuery):
 
 async def get_videocards(message: types.Message):
     videocards = parser()
-    for i in videocards:
-        await message.answer(
-            f"{i['photo']}\n",
-            f"{i['title']}\n",
-            f"{i['price']}\n",
-            f"{i['vendor_code']}\n"
-        )
+    await message.answer(
+        f"{videocards['link']}\n",
+        f"{videocards['title']}\n",
+        f"{videocards['photo']}\n",
+        f"{videocards['price']}\n",
+        f"{videocards['vendor_code']}\n",
+        parse_mode=ParseMode.HTML
+    )
 
 
 def register_messege_handler(dp: Dispatcher):
