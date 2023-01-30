@@ -98,14 +98,13 @@ async def complete_delete(call: types.CallbackQuery):
 
 async def get_videocards(message: types.Message):
     videocards = parser()
-    await message.answer(
-        f"{videocards['link']}\n",
-        f"{videocards['title']}\n",
-        f"{videocards['photo']}\n",
-        f"{videocards['price']}\n",
-        f"{videocards['vendor_code']}\n",
-        parse_mode=ParseMode.HTML
-    )
+    for i in videocards:
+        await message.answer(
+            f"{i['link']}\n"
+            f"{i['title']}\n"
+            f"{i['price']}\n"
+            f"{i['vendor_code']}\n"
+        )
 
 
 def register_messege_handler(dp: Dispatcher):

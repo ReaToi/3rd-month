@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from bs4 import BeautifulSoup
 import requests
 
@@ -26,12 +24,11 @@ def get_data(html):
     videocards = []
     for item in items:
         videocards.append({
-            'photo': item.find('img'),
             'link': f"https://enter.kg{item.find('a').get('href')}",
             'title': item.find('div', class_='rows').getText(),
             'price': item.find('td', width='260').getText(),
             'vendor_code': item.find('td', width='110').getText(),
-                    })
+                         })
     return videocards
 
 
@@ -42,8 +39,7 @@ def parser():
         html = get_html(f'{URL}')
         current_page = get_data(html.text)
         videocards.extend(current_page)
-        # return news
-        pprint(videocards)
+        return videocards
     else:
         raise Exception('Error in parser')
 
