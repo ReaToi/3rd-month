@@ -1,9 +1,11 @@
+from pprint import pprint
+
 from bs4 import BeautifulSoup
 import requests
 
 
 URL = 'https://enter.kg/videokarty_bishkek'
-
+NBA = 'https://www.nba.com/games?date=2023-02-01'
 
 HEADERS = {
     'Accept': ' text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/'
