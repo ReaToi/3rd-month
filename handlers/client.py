@@ -1,7 +1,8 @@
 from aiogram import Dispatcher, types
 from config import bot, ADMINS
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from time import sleep
+from ai import image_generation, get_text
 from parser.news import parser
 from db.bot_db import sql_command_random, sql_comand_deleete
 
@@ -107,6 +108,14 @@ async def get_videocards(message: types.Message):
         )
 
 
+async def advertising(message: types.Message):
+    await message.answer(get_text(message))
+
+
+async def image_generate(message: types.Message):
+    await message.answer(image_generation(message))
+
+
 def register_messege_handler(dp: Dispatcher):
     dp.register_message_handler(start_hendler, commands=['start'])
     dp.register_message_handler(mem, commands=['mem'])
@@ -117,3 +126,6 @@ def register_messege_handler(dp: Dispatcher):
     dp.register_callback_query_handler(complete_delete,
                                        lambda call: call.data and call.data.startswith('delete '))
     dp.register_message_handler(get_videocards, commands=['videocards'])
+    dp.register_message_handler(image_generate, commands='image_generate')
+    dp.register_message_handler(advertising, commands='advertising')
+

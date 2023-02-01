@@ -46,4 +46,4 @@ def parser():
         raise Exception('Error in parser')
 
 
-parser()
+
